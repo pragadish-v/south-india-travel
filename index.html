@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South India Travel - Explore, Plan, Discover</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🌍</span>
+                <h1>South India Travel</h1>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#destinations" class="nav-link">Destinations</a></li>
+                <li><a href="#filters" class="nav-link">Filters</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Discover South India</h1>
+            <p class="hero-subtitle">Explore stunning destinations, plan your perfect trip, and create lasting memories
+            </p>
+            <button class="btn btn-primary"
+                onclick="document.getElementById('filters').scrollIntoView({behavior: 'smooth'})">
+                Start Exploring
+            </button>
+        </div>
+        <div class="hero-image">
+            <img src="images/main.jpg" alt="South India's Natural Beauty" class="hero-image">
+        </div>
+
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filters-section" id="filters">
+        <div class="container">
+            <h2>Plan Your Trip</h2>
+            <p class="subtitle">Filter destinations by your preferences</p>
+
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="budgetFilter">Budget:</label>
+                    <select id="budgetFilter" class="filter-select" onchange="filterDestinations()">
+                        <option value="">All Budgets</option>
+                        <option value="budget">Budget (₹5k-10k)</option>
+                        <option value="midrange">Mid-Range (₹10k-20k)</option>
+                        <option value="luxury">Luxury (₹20k+)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="seasonFilter">Season:</label>
+                    <select id="seasonFilter" class="filter-select" onchange="filterDestinations()">
+                        <option value="">All Seasons</option>
+                        <option value="monsoon">Monsoon</option>
+                        <option value="autumn">Autumn</option>
+                        <option value="winter">Winter</option>
+                        <option value="spring">Spring</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="styleFilter">Travel Style:</label>
+                    <select id="styleFilter" class="filter-select" onchange="filterDestinations()">
+                        <option value="">All Styles</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="leisure">Leisure</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="pilgrimage">Pilgrimage</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-secondary" onclick="resetFilters()">Reset Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Grid -->
+    <section class="destinations-section" id="destinations">
+        <div class="container">
+            <h2>Popular Destinations</h2>
+            <p class="subtitle">Choose a destination to explore in detail</p>
+
+            <div class="destinations-grid" id="destinationsGrid">
+                <!-- Destination cards will be populated by JavaScript -->
+            </div>
+
+            <div id="noResults" class="no-results hidden">
+                <p>No destinations match your filters. Try adjusting your preferences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destination Detail Modal -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="detail-container">
+                <div class="detail-image">
+                    <img id="detailImg" src="" alt="Destination">
+                </div>
+                <div class="detail-info">
+                    <h1 id="detailName"></h1>
+                    <p id="detailDescription" class="detail-description"></p>
+
+                    <div class="detail-section">
+                        <h3>Quick Info</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Best Time to Visit:</span>
+                                <span id="detailBestTime"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Temperature:</span>
+                                <span id="detailTemp"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Budget (3 days):</span>
+                                <span id="detailBudget"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Highlights</h3>
+                        <ul id="detailHighlights" class="highlights-list"></ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Activities</h3>
+                        <ul id="detailActivities" class="activities-list"></ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Travel Tips</h3>
+                        <p id="detailTips" class="tips-text"></p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Cost Breakdown (3-day trip)</h3>
+                        <div id="detailCosts" class="costs-list"></div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Nearby Attractions</h3>
+                        <ul id="detailNearby" class="nearby-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>About South India Travel</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>South India is a treasure trove of natural beauty, cultural heritage, and diverse experiences.
+                        From the misty hills of the Western Ghats to the serene beaches and ancient temples, there's
+                        something for everyone.</p>
+                    <p>This platform is designed to help you discover, plan, and book your perfect South Indian
+                        adventure. Whether you're a budget traveler, seeking luxury escapes, or exploring cultural
+                        heritage, we have curated destinations and tips just for you.</p>
+                    <h3>Why Choose South India?</h3>
+                    <ul class="features-list">
+                        <li>✅ Diverse landscapes - Mountains, beaches, forests</li>
+                        <li>✅ Rich cultural heritage - Temples, palaces, monuments</li>
+                        <li>✅ Affordable travel - Budget-friendly options</li>
+                        <li>✅ Year-round travel - Something for every season</li>
+                        <li>✅ Adventure activities - Trekking, water sports, wildlife</li>
+                        <li>✅ Delicious cuisine - Regional flavors and traditions</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="South India Beauty" class="about-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="subtitle">Have questions? We're here to help!</p>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>📧 Email: info@southindiatravel.com</p>
+                <p>📱 Phone: +91 95432-09876</p>
+                <p>📍 Location: Chennai, Tamil Nadu, India</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 South India Travel. All rights reserved.</p>
+            <p>Built with ❤️ for travel enthusiasts</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        (function (d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function () {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '69565a23ce2b36b7ca0d9215' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    voice: {
+                        url: "https://runtime-api.voiceflow.com"
+                    }
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
