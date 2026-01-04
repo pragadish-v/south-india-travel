@@ -9,7 +9,7 @@
 
 **A responsive travel website showcasing the rich culture, stunning destinations, and attractions across South India. Powered by an intelligent AI Travel Assistant that provides personalized recommendations, answers travel queries, and helps plan your perfect South India journey.**
 
-[🌐 Live Demo](https://pragadish-v.github.io/south-india-travel/) • [📝 Report Bug](https://github.com/pragadish-v/south-india-travel/issues) • [✨ Request Feature](https://github.com/pragadish-v/south-india-travel/issues)
+[🌐 Live Demo](https://pragadish-v.github.io/south-india-travel/)
 
 </div>
 
