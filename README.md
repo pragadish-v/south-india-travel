@@ -126,7 +126,6 @@ south-india-travel/
 - [x] Responsive design implementation
 - [x] Bootstrap integration
 - [x] Destination showcases
-- [ ] 
 - [x] AI Travel Assistant integration
 - [x] Natural language processing for travel queries
 - [ ] Voice-enabled AI assistant
